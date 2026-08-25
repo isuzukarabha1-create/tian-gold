@@ -3,31 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TIAN GOLD</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d97706">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>TIAN GOLD V13.1</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   body{font-family:Arial,sans-serif}
   .tab-active{color:#a16207;border-bottom:3px solid #eab308}
   .tab-inactive{color:#6b7280}
   .danger{color:#dc2626!important}
-
-.form-compact{max-height:62vh;overflow-y:auto;padding-right:2px;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
-.form-compact label{font-size:.75rem}
-.form-compact input,.form-compact select{padding:.65rem .75rem!important;border-radius:.75rem!important;margin-bottom:.55rem!important}
-.media-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem}
-.media-thumb{position:relative;aspect-ratio:1/1;border:1px solid #e5e7eb;border-radius:.75rem;overflow:hidden;background:#f3f4f6;cursor:pointer}
-.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover}
-.media-play{position:absolute;inset:auto .35rem .35rem auto;background:rgba(0,0,0,.72);color:#fff;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px}
-.media-modal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
-.media-modal-content{max-width:95vw;max-height:90vh;border-radius:14px;overflow:hidden;background:#111;position:relative}
-.media-modal-content img,.media-modal-content video{display:block;max-width:95vw;max-height:82vh}
-.media-close{position:absolute;right:8px;top:8px;z-index:2;background:rgba(0,0,0,.7);color:#fff;border:0;border-radius:999px;width:38px;height:38px;font-size:22px}
-.trans-card{padding:.75rem!important;border-radius:1rem!important}
-@media (max-width:380px){.media-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.status-pill{display:inline-block;font-size:9px;font-weight:800;padding:3px 6px;border-radius:999px}.status-offer{background:#fef3c7;color:#92400e}.status-deal{background:#dcfce7;color:#166534}.media-thumb{position:relative;width:78px;height:78px;border-radius:10px;overflow:hidden;border:1px solid #e5e7eb;background:#f3f4f6}.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover}.media-grid{display:flex;gap:8px;flex-wrap:wrap}.media-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.65);color:#fff;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px}.media-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}.media-modal.hidden{display:none}.media-modal-content{max-width:95vw;max-height:90vh;position:relative}.media-modal-content img,.media-modal-content video{max-width:95vw;max-height:85vh;border-radius:12px}.media-close{position:absolute;right:-8px;top:-8px;background:#fff;border-radius:999px;width:34px;height:34px;font-size:24px;z-index:2}</style>
+</style>
 </head>
 <body class="min-h-screen bg-gray-100 text-gray-800">
 <div class="max-w-md mx-auto min-h-screen bg-white shadow-xl">
@@ -113,7 +96,7 @@
           <div class="flex justify-between"><span>Keuntungan</span><b id="resUntung"></b></div>
           <div class="flex justify-between"><span>Bagian Saya (50%)</span><b id="resSaya"></b></div>
           <div class="flex justify-between"><span>Bagian Bos (50%)</span><b id="resBos"></b></div>
-          <div class="flex justify-between"><span>Bagian Sales (20% dari bagian saya)</span><b id="resSales"></b></div>
+          <div class="flex justify-between"><span>Bagian Sales (25% dari bagian saya)</span><b id="resSales"></b></div>
           <div class="flex justify-between border-t pt-3"><span>Laba Bersih Saya</span><b id="resBersih"></b></div>
         </div>
       </div>
@@ -127,96 +110,156 @@
 
 <!-- ================= ADMIN ================= -->
 <section id="tab-admin" class="hidden p-5">
-<div id="loginAdmin"><h2 class="text-xl font-bold mb-2">Admin TIAN GOLD</h2><p class="text-sm text-gray-500 mb-4">Masukkan PIN untuk membuka menu admin.</p><input id="pinInput" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-3" placeholder="PIN Admin"><button onclick="cekPin()" class="w-full bg-gray-900 text-white font-bold py-3 rounded-xl">MASUK ADMIN</button></div>
-<div id="dashAdmin" class="hidden">
-<div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold">Dashboard Admin</h2><button onclick="logoutAdmin()" class="text-red-600 text-sm font-bold">Keluar</button></div>
-<div class="grid grid-cols-2 gap-2 mb-5 sticky top-12 z-10 bg-white py-2">
-<button id="adminNav-pin" onclick="showAdminTab('pin')" class="admin-tab-btn tab-active border rounded-xl px-2 py-3 text-sm font-bold">🔐 PIN</button><button id="adminNav-harga" onclick="showAdminTab('harga')" class="admin-tab-btn tab-inactive border rounded-xl px-2 py-3 text-sm font-bold">💰 Harga</button><button id="adminNav-transaksi" onclick="showAdminTab('transaksi')" class="admin-tab-btn tab-inactive border rounded-xl px-2 py-3 text-sm font-bold">🧾 Transaksi</button><button id="adminNav-laporan" onclick="showAdminTab('laporan')" class="admin-tab-btn tab-inactive border rounded-xl px-2 py-3 text-sm font-bold">📊 Laporan</button></div>
-<div id="adminTab-pin" class="admin-panel"><div class="border rounded-2xl p-4"><h3 class="font-bold mb-3">🔐 Ubah PIN Admin</h3><input id="pinLama" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-2" placeholder="PIN lama"><input id="pinBaru" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-2" placeholder="PIN baru"><input id="pinKonfirmasi" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-3" placeholder="Ulangi PIN baru"><button onclick="ubahPin()" class="w-full bg-gray-800 text-white font-bold py-3 rounded-xl">SIMPAN PIN BARU</button></div></div>
-<div id="adminTab-harga" class="admin-panel hidden"><div class="border rounded-2xl p-4 mb-5"><h3 class="font-bold mb-3">💰 Update Harga Emas</h3><label class="text-sm">Harga dasar per gram</label><input id="newPrice" type="text" inputmode="numeric" autocomplete="off" class="w-full border rounded-xl p-3 my-2" placeholder="Contoh: 2.335.000"><p class="text-xs text-gray-500 mb-3">Nominal otomatis menggunakan pemisah ribuan.</p><button onclick="simpanHarga()" class="w-full bg-yellow-500 text-white font-bold py-3 rounded-xl">SIMPAN HARGA</button></div><div class="border rounded-2xl p-4 mb-5"><h3 class="font-bold mb-1">⚙️ Pengaturan Kadar & Persentase Beli</h3><p class="text-xs text-gray-500 mb-4">Perubahan dipakai untuk perhitungan transaksi berikutnya.</p><div id="kadarSettings" class="space-y-3"></div><button onclick="simpanKadar()" class="w-full mt-4 bg-gray-900 text-white font-bold py-3 rounded-xl">SIMPAN KADAR</button></div><div class="border rounded-2xl p-4"><h3 class="font-bold mb-3">Riwayat Harga</h3><ul id="listHistory" class="space-y-2"></ul></div></div>
-<div id="adminTab-transaksi" class="admin-panel hidden"><div class="border rounded-2xl p-4"><div class="flex justify-between items-center mb-4"><div><h3 class="font-bold">Riwayat Transaksi</h3><p id="jumlahTransaksi" class="text-xs text-gray-500 mt-1"></p></div><button onclick="toggleTambahTransaksi()" class="bg-yellow-500 text-white w-10 h-10 rounded-full text-2xl font-bold leading-none">+</button></div>
-<div id="formTransaksi" class="hidden border-t pt-3 mb-4">
-  <div class="flex justify-between items-center mb-2"><h4 class="font-bold">Tambah Transaksi</h4><span class="text-[10px] text-gray-400">Form ringkas</span></div>
-  <div class="form-compact">
-    <div class="grid grid-cols-2 gap-x-2">
-      <div><label>Nama</label><input id="trNama" class="w-full border" placeholder="Nama pelanggan"></div>
-      <div><label>No HP</label><input id="trHp" type="tel" inputmode="tel" class="w-full border" placeholder="No HP"></div>
-      <div><label>Nama Bank</label><input id="trBank" class="w-full border" placeholder="BCA"></div>
-      <div><label>Nama Rekening</label><input id="trNamaRekening" class="w-full border" placeholder="Nama pemilik rekening"></div>
-      <div><label>No Rekening</label><input id="trRekening" type="text" inputmode="numeric" class="w-full border" placeholder="No rekening"></div>
-      <div><label>Jenis</label><select id="trJenis" class="w-full border"><option value="Perhiasan">Perhiasan</option><option value="Logam Mulia">Logam Mulia</option></select></div>
-      <div><label>Kadar Emas</label><select id="trKadar" class="w-full border"></select></div>
-      <div><label>Harga Emas / Gram</label><input id="trHargaEmas" type="text" inputmode="numeric" autocomplete="off" class="w-full border" placeholder="2.335.000"></div>
-      <div><label>Berat Total (gr)</label><input id="trBerat" type="number" step="0.01" inputmode="decimal" class="w-full border" placeholder="10.50"></div>
-      <div><label>Potongan Batu (gr)</label><input id="trBatu" type="number" step="0.01" inputmode="decimal" class="w-full border" placeholder="0"></div>
-      <div><label>Harga Deal</label><input id="trDeal" type="text" inputmode="numeric" autocomplete="off" class="w-full border" placeholder="20.000.000"></div>
-    </div>
-    <div class="rounded-xl bg-gray-50 border p-2 mb-2"><div class="flex justify-between text-xs"><span class="font-semibold">Taksiran Maximum</span><b id="trMax">-</b></div></div>
-    <div class="border rounded-xl p-2 mb-2 bg-yellow-50">
-      <div class="grid grid-cols-2 gap-2 items-end"><div><label>Melalui</label><select id="trSumber" class="w-full border"><option value="sendiri">Saya Sendiri</option><option value="sales">Sales</option></select></div><div id="salesNameBox" class="hidden"><label>Nama Sales</label><input id="trSales" class="w-full border" placeholder="Nama sales"></div></div>
-      <p class="text-[10px] text-gray-500 mt-1">Sales mendapat 20% dari bagian Saya.</p>
-    </div>
-    <div class="border rounded-xl p-2 mb-2"><label>Foto / Video</label><input id="trMedia" type="file" accept="image/*,video/*" multiple class="w-full text-xs"><div id="mediaPreview" class="mt-2 text-[10px] text-gray-500"></div></div>
-    <div id="previewTransaksi" class="hidden rounded-xl bg-gray-50 border p-3 mb-2 text-xs"></div>
-  </div>
-  <div class="grid grid-cols-2 gap-2 mt-2 sticky bottom-0 bg-white pt-2">
-    <button onclick="batalTransaksi()" class="text-sm text-gray-500 border rounded-xl py-3">Batal</button>
-    <button onclick="simpanTransaksi()" class="bg-green-600 text-white font-bold py-3 rounded-xl">SIMPAN</button>
-  </div>
-</div><div class="mb-3 rounded-xl bg-blue-50 border border-blue-100 p-3 text-xs text-blue-800">Penawaran tetap disimpan di riwayat. <b>Hanya transaksi yang sudah ditandai Deal/Transfer</b> yang masuk ke laporan keuntungan.</div><div id="riwayatTransaksi" class="space-y-3"></div><button onclick="exportExcel()" class="w-full mt-5 bg-green-600 text-white font-bold py-3 rounded-xl">EXPORT TRANSAKSI KE EXCEL</button></div></div>
-<div id="adminTab-laporan" class="admin-panel hidden"><div class="border rounded-2xl p-4"><div class="flex justify-between items-center mb-4"><div><h3 class="font-bold">📊 Laporan Penghasilan</h3><p class="text-xs text-gray-500">Filter tanggal dan sales.</p></div><button onclick="resetLaporan()" class="text-xs text-gray-500 font-bold">Reset</button></div><div class="grid grid-cols-2 gap-3 mb-3"><div><label class="block text-xs font-semibold mb-1">Dari tanggal</label><input id="laporDari" type="date" class="w-full border rounded-xl p-3"></div><div><label class="block text-xs font-semibold mb-1">Sampai tanggal</label><input id="laporSampai" type="date" class="w-full border rounded-xl p-3"></div></div><label class="block text-xs font-semibold mb-1">Filter Sales</label><select id="laporSales" class="w-full border rounded-xl p-3 mb-3"></select><button onclick="renderLaporan()" class="w-full bg-gray-900 text-white font-bold py-3 rounded-xl mb-4">LIHAT LAPORAN</button><div id="laporanRingkasan" class="grid grid-cols-2 gap-2 mb-4"></div><div id="laporanSalesRingkasan" class="space-y-2 mb-4"></div><div id="laporanHarian" class="space-y-3"></div><button onclick="exportLaporanExcel()" class="w-full mt-4 bg-green-600 text-white font-bold py-3 rounded-xl">EXPORT LAPORAN KE XLS</button></div></div>
-</div></section>
 
-<div id="mediaModal" class="media-modal hidden" onclick="closeMediaModal(event)"><div id="mediaModalContent" class="media-modal-content"></div></div>
+  <!-- PIN -->
+  <div id="loginAdmin">
+    <h2 class="text-xl font-bold mb-2">Admin TIAN GOLD</h2>
+    <p class="text-sm text-gray-500 mb-4">Masukkan PIN untuk membuka menu admin.</p>
+
+    <input id="pinInput" type="password" inputmode="numeric"
+      class="w-full border rounded-xl p-3 mb-3" placeholder="PIN Admin">
+
+    <button onclick="cekPin()" class="w-full bg-gray-900 text-white font-bold py-3 rounded-xl">
+      MASUK ADMIN
+    </button>
+  </div>
+
+  <!-- ISI ADMIN SETELAH PIN -->
+  <div id="dashAdmin" class="hidden">
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-xl font-bold">Dashboard Admin</h2>
+      <button onclick="logoutAdmin()" class="text-red-600 text-sm font-bold">Keluar</button>
+    </div>
+
+    <!-- UBAH PIN -->
+    <div class="border rounded-2xl p-4 mb-5">
+      <h3 class="font-bold mb-3">🔐 Ubah PIN Admin</h3>
+      <input id="pinLama" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-2" placeholder="PIN lama">
+      <input id="pinBaru" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-2" placeholder="PIN baru">
+      <input id="pinKonfirmasi" type="password" inputmode="numeric" class="w-full border rounded-xl p-3 mb-3" placeholder="Ulangi PIN baru">
+      <button onclick="ubahPin()" class="w-full bg-gray-800 text-white font-bold py-3 rounded-xl">SIMPAN PIN BARU</button>
+    </div>
+
+    <!-- UPDATE HARGA -->
+    <div class="border rounded-2xl p-4 mb-5">
+      <h3 class="font-bold mb-3">Update Harga Emas</h3>
+      <label class="text-sm">Harga dasar per gram</label>
+      <input id="newPrice" type="text" inputmode="numeric"
+        class="w-full border rounded-xl p-3 my-2" placeholder="Contoh: 2335000">
+      <button onclick="simpanHarga()" class="w-full bg-yellow-500 text-white font-bold py-3 rounded-xl">
+        SIMPAN HARGA
+      </button>
+    </div>
+
+    <!-- PENGATURAN KADAR -->
+    <div class="border rounded-2xl p-4 mb-5">
+      <h3 class="font-bold mb-1">⚙️ Pengaturan Kadar & Persentase Beli</h3>
+      <p class="text-xs text-gray-500 mb-4">Admin dapat mengubah persentase beli. Perubahan dipakai untuk perhitungan berikutnya.</p>
+      <div id="kadarSettings" class="space-y-3"></div>
+      <button onclick="simpanKadar()" class="w-full mt-4 bg-gray-900 text-white font-bold py-3 rounded-xl">
+        SIMPAN KADAR
+      </button>
+    </div>
+
+    <!-- RIWAYAT HARGA -->
+    <div class="border rounded-2xl p-4 mb-5">
+      <h3 class="font-bold mb-3">Riwayat Harga</h3>
+      <ul id="listHistory" class="space-y-2"></ul>
+    </div>
+
+    <!-- TRANSAKSI -->
+    <div class="border rounded-2xl p-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-bold">Riwayat Transaksi</h3>
+        <button onclick="toggleTambahTransaksi()" class="bg-yellow-500 text-white w-10 h-10 rounded-full text-2xl font-bold leading-none">+</button>
+      </div>
+
+      <!-- FORM TAMBAH TRANSAKSI -->
+      <div id="formTransaksi" class="hidden border-t pt-4 mb-5">
+        <h4 class="font-bold mb-4">Tambah Transaksi</h4>
+
+        <label class="block text-sm font-semibold mb-1">Nama</label>
+        <input id="trNama" class="w-full border rounded-xl p-3 mb-3" placeholder="Nama pelanggan">
+
+        <label class="block text-sm font-semibold mb-1">No HP</label>
+        <input id="trHp" type="tel" class="w-full border rounded-xl p-3 mb-3" placeholder="No HP">
+
+        <label class="block text-sm font-semibold mb-1">Nama Bank</label>
+        <input id="trBank" class="w-full border rounded-xl p-3 mb-3" placeholder="Contoh: BCA">
+
+        <label class="block text-sm font-semibold mb-1">No Rekening</label>
+        <input id="trRekening" type="text" inputmode="numeric" class="w-full border rounded-xl p-3 mb-3" placeholder="No rekening">
+
+        <label class="block text-sm font-semibold mb-1">Jenis</label>
+        <select id="trJenis" class="w-full border rounded-xl p-3 mb-3">
+          <option value="Perhiasan">Perhiasan</option>
+          <option value="Logam Mulia">Logam Mulia</option>
+        </select>
+
+        <label class="block text-sm font-semibold mb-1">Harga Emas / Gram</label>
+        <input id="trHargaEmas" type="text" inputmode="numeric"
+          class="w-full border rounded-xl p-3 mb-3" placeholder="Contoh: 2.335.000">
+
+        <label class="block text-sm font-semibold mb-1">Berat Total (gram)</label>
+        <input id="trBerat" type="number" step="0.01" inputmode="decimal"
+          class="w-full border rounded-xl p-3 mb-3" placeholder="Contoh: 10.50">
+
+        <label class="block text-sm font-semibold mb-1">Potongan Batu (gram)</label>
+        <input id="trBatu" type="number" step="0.01" inputmode="decimal"
+          class="w-full border rounded-xl p-3 mb-3" placeholder="Jika tidak ada isi 0">
+
+        <label class="block text-sm font-semibold mb-1">Kadar Emas</label>
+        <select id="trKadar" class="w-full border rounded-xl p-3 mb-3"></select>
+
+        <div class="rounded-xl bg-gray-50 border p-3 mb-3">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-semibold">Taksiran Maximum</span>
+            <b id="trMax">-</b>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">Otomatis dihitung dari harga emas, kadar, dan berat bersih.</p>
+        </div>
+
+        <label class="block text-sm font-semibold mb-1">Harga Deal / Transaksi</label>
+        <input id="trDeal" type="text" inputmode="numeric"
+          class="w-full border rounded-xl p-3 mb-4" placeholder="Masukkan harga deal">
+
+        <div class="border rounded-xl p-3 mb-4">
+          <label class="block text-sm font-semibold mb-2">Foto / Video Perhiasan</label>
+          <input id="trMedia" type="file" accept="image/*,video/*" multiple class="w-full text-sm">
+          <p class="text-xs text-gray-500 mt-2">Foto/video disimpan bersama transaksi dan dapat dilihat atau di-download dari riwayat.</p>
+          <div id="mediaPreview" class="mt-2 text-xs text-gray-500"></div>
+        </div>
+
+        <!-- PREVIEW OTOMATIS -->
+        <div id="previewTransaksi" class="hidden rounded-xl bg-gray-50 border p-4 mb-4 text-sm"></div>
+
+        <button onclick="simpanTransaksi()" class="w-full bg-green-600 text-white font-bold py-3 rounded-xl">
+          SIMPAN TRANSAKSI
+        </button>
+
+        <button onclick="batalTransaksi()" class="w-full mt-3 text-sm text-gray-500 py-2">
+          Batal
+        </button>
+      </div>
+
+      <!-- RIWAYAT -->
+      <div id="riwayatTransaksi" class="space-y-3"></div>
+
+      <button onclick="exportExcel()" class="w-full mt-5 bg-green-600 text-white font-bold py-3 rounded-xl">
+        EXPORT KE EXCEL
+      </button>
+    </div>
+  </div>
+</section>
 
 <footer class="text-center text-xs text-gray-400 p-5 border-t mt-5">
-  TIAN GOLD • Proses Cepat dan Aman
+  TIAN GOLD V13.1 • Proses Cepat dan Aman
 </footer>
 
 </div>
 
 <script>
 let ADMIN_PIN = localStorage.getItem('tg_admin_pin') || '888999';
-let SERVER_ONLINE = false;
-let SERVER_LOADING = false;
-async function persistServer(){
-  try{
-    const payload={adminPin:ADMIN_PIN,hargaDasar:data.hargaDasar,margin:data.margin,history:data.history,kadarList:data.kadarList,lastRes:data.lastRes,transaksi:data.transaksi};
-    const r=await fetch('/api/data',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    SERVER_ONLINE=true;
-    updateServerStatus();
-    return true;
-  }catch(e){SERVER_ONLINE=false;updateServerStatus();return false;}
-}
-async function loadServer(){
-  SERVER_LOADING=true;updateServerStatus();
-  try{
-    const r=await fetch('/api/data',{cache:'no-store'});
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    const j=await r.json();
-    if(j && j.data){
-      const d=j.data;
-      if(Number.isFinite(Number(d.hargaDasar))) data.hargaDasar=Number(d.hargaDasar);
-      if(Array.isArray(d.history)) data.history=d.history;
-      if(Array.isArray(d.kadarList) && d.kadarList.length) data.kadarList=d.kadarList;
-      if(Array.isArray(d.transaksi)) data.transaksi=d.transaksi.map(t=>({...t,status:t.status||'penawaran'}));
-      if(typeof d.adminPin==='string' && /^\d{4,12}$/.test(d.adminPin)) ADMIN_PIN=d.adminPin;
-      SERVER_ONLINE=true;
-      localStorage.setItem('tg_admin_pin',ADMIN_PIN);
-      localStorage.setItem('tg_harga',String(data.hargaDasar));
-      localStorage.setItem('tg_history',JSON.stringify(data.history));
-      localStorage.setItem('tg_kadar_list',JSON.stringify(data.kadarList));
-      localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi));
-    }else{SERVER_ONLINE=true;}
-  }catch(e){SERVER_ONLINE=false;}
-  SERVER_LOADING=false;updateServerStatus();
-}
-function updateServerStatus(){
-  const els=document.querySelectorAll('[data-server-status]');
-  els.forEach(el=>{el.textContent=SERVER_LOADING?'🟡 Menghubungkan server...':(SERVER_ONLINE?'🟢 Data online':'🔴 Mode offline / server belum tersambung');el.className=SERVER_ONLINE?'text-green-600 font-bold':'text-red-600 font-bold';});
-}
-
 
 const data = {
   hargaDasar: 2335000,
@@ -227,13 +270,13 @@ const data = {
   ],
   kadarList: [
     {n:'300 (6K)', p:0.27},
-    {n:'375 (8K)', p:0.34},
-    {n:'420 (9–10K)', p:0.37},
-    {n:'700 (16K)', p:0.67},
-    {n:'750 (17–18K)', p:0.71},
+    {n:'375 (9K)', p:0.34},
+    {n:'420 (10K)', p:0.37},
+    {n:'700 (17K)', p:0.67},
+    {n:'750 (18K)', p:0.71},
     {n:'21K', p:0.84},
     {n:'22K', p:0.89},
-    {n:'23–24K', p:0.91}
+    {n:'24K (LM)', p:0.90}
   ],
   lastRes:null,
   transaksi:[]
@@ -253,7 +296,7 @@ function esc(v){
   }[m]));
 }
 
-async function init(){
+function init(){
   const savedHarga=localStorage.getItem('tg_harga');
   if(savedHarga) data.hargaDasar=Number(savedHarga);
 
@@ -272,19 +315,11 @@ async function init(){
   if(savedTrans){
     try{data.transaksi=JSON.parse(savedTrans)||[]}catch(e){data.transaksi=[]}
   }
-  data.transaksi=data.transaksi.map(t=>({...t,status:t.status||'penawaran'}));
-  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi));
 
-  isiKadar();
-  renderKadarSettings();
-  loadHist();
-  updateServerStatus();
-  await loadServer();
   isiKadar();
   renderKadarSettings();
   loadHist();
 }
-
 
 function renderKadarSettings(){
   const box=document.getElementById('kadarSettings');
@@ -316,7 +351,7 @@ function simpanKadar(){
   });
 
   data.kadarList=updated;
-  localStorage.setItem('tg_kadar_list',JSON.stringify(data.kadarList)); persistServer();
+  localStorage.setItem('tg_kadar_list',JSON.stringify(data.kadarList));
   isiKadar();
   renderKadarSettings();
   alert('Persentase kadar berhasil disimpan.');
@@ -474,11 +509,10 @@ function cekPin(){
   if(pin===ADMIN_PIN){
     document.getElementById('loginAdmin').classList.add('hidden');
     document.getElementById('dashAdmin').classList.remove('hidden');
-    document.getElementById('newPrice').value=new Intl.NumberFormat('id-ID').format(Number(data.hargaDasar||0));
+    document.getElementById('newPrice').value=data.hargaDasar;
     loadHist();
     renderKadarSettings();
     renderTransaksi();
-    showAdminTab('pin');
     document.getElementById('pinInput').value='';
   }else{
     alert('PIN salah!');
@@ -496,13 +530,13 @@ function simpanHarga(){
   if(!np || np<100000)return alert('Harga tidak valid!');
 
   data.hargaDasar=np;
-  localStorage.setItem('tg_harga',String(np)); persistServer();
+  localStorage.setItem('tg_harga',String(np));
 
   const today=new Date().toLocaleDateString('id-ID',{
     day:'numeric',month:'short',year:'numeric'
   });
   data.history.unshift({date:today,price:np});
-  localStorage.setItem('tg_history',JSON.stringify(data.history)); persistServer();
+  localStorage.setItem('tg_history',JSON.stringify(data.history));
 
   loadHist();
   alert('Harga berhasil diupdate.');
@@ -530,16 +564,23 @@ function formatInputRupiah(el){
 }
 
 function setupRupiahInputs(){
-  ['hargaPenawaran','newPrice','trHargaEmas','trDeal'].forEach(id=>{const el=document.getElementById(id);if(!el||el.dataset.rupiahReady==='1')return;el.dataset.rupiahReady='1';el.addEventListener('input',function(){const digits=String(this.value||'').replace(/\D/g,'');this.value=digits?new Intl.NumberFormat('id-ID').format(Number(digits)):'';if(id==='trHargaEmas'||id==='trDeal')updateTransaksiPreview();});el.addEventListener('blur',function(){const n=parseRupiah(this.value);this.value=n?new Intl.NumberFormat('id-ID').format(n):'';});});
-  ['trBerat','trBatu','trKadar'].forEach(id=>{const el=document.getElementById(id);if(el){el.addEventListener('input',updateTransaksiPreview);el.addEventListener('change',updateTransaksiPreview);}});
+  ['hargaPenawaran','newPrice','trHargaEmas','trDeal'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el || el.dataset.rupiahReady==='1')return;
+    el.dataset.rupiahReady='1';
+    el.setAttribute('inputmode','numeric');
+    el.addEventListener('input',function(){
+      const digits=this.value.replace(/\D/g,'');
+      this.value=digits ? new Intl.NumberFormat('id-ID').format(Number(digits)) : '';
+      if(id==='trHargaEmas'||id==='trDeal') updateTransaksiPreview();
+    });
+    el.addEventListener('blur',function(){formatInputRupiah(this);});
+  });
+  ['trBerat','trBatu','trKadar'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.addEventListener('input',updateTransaksiPreview);el.addEventListener('change',updateTransaksiPreview);}
+  });
 }
-
-function setupFormFocus(){
-  const form=document.getElementById('formTransaksi'); if(!form||form.dataset.focusReady==='1')return; form.dataset.focusReady='1';
-  form.querySelectorAll('input,select').forEach(el=>el.addEventListener('focus',()=>setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'center'}),180)));
-}
-
-function showAdminTab(name){['pin','harga','transaksi','laporan'].forEach(t=>{const p=document.getElementById('adminTab-'+t),b=document.getElementById('adminNav-'+t);if(p)p.classList.toggle('hidden',t!==name);if(b){b.classList.toggle('tab-active',t===name);b.classList.toggle('tab-inactive',t!==name);}});if(name==='harga'){document.getElementById('newPrice').value=new Intl.NumberFormat('id-ID').format(Number(data.hargaDasar||0));loadHist();renderKadarSettings();}if(name==='transaksi')renderTransaksi();if(name==='laporan'){refreshSalesFilter();renderLaporan();}}
 
 function toggleTambahTransaksi(){
   const form=document.getElementById('formTransaksi');
@@ -547,8 +588,7 @@ function toggleTambahTransaksi(){
   if(!form.classList.contains('hidden')){
     isiKadar();
     document.getElementById('trHargaEmas').value=new Intl.NumberFormat('id-ID').format(data.hargaDasar);
-    document.getElementById('trNama').focus();
-    setTimeout(()=>document.getElementById('trNama').scrollIntoView({behavior:'smooth',block:'center'}),150);
+    document.getElementById('trHargaEmas').focus();
   }
 }
 
@@ -578,6 +618,23 @@ function formatInputRupiah(el){
   el.value=n ? new Intl.NumberFormat('id-ID').format(n) : '';
 }
 
+function setupRupiahInputs(){
+  ['trHargaEmas','trDeal'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.addEventListener('input',()=>{
+      const raw=el.value.replace(/\D/g,'');
+      el.value=raw ? new Intl.NumberFormat('id-ID').format(Number(raw)) : '';
+      if(id==='trHargaEmas' || id==='trDeal') updateTransaksiPreview();
+    });
+  });
+  ['trBerat','trBatu','trKadar'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('input',updateTransaksiPreview);
+    if(el) el.addEventListener('change',updateTransaksiPreview);
+  });
+}
+
 function toggleTambahTransaksi(){
   const form=document.getElementById('formTransaksi');
   form.classList.toggle('hidden');
@@ -590,14 +647,11 @@ function toggleTambahTransaksi(){
 }
 
 function resetFormTransaksi(){
-  ['trNama','trHp','trBank','trNamaRekening','trRekening','trBerat','trBatu','trHargaEmas','trDeal'].forEach(id=>{
+  ['trNama','trHp','trBank','trRekening','trBerat','trBatu','trHargaEmas','trDeal'].forEach(id=>{
     const el=document.getElementById(id);
     if(el)el.value='';
   });
   document.getElementById('trJenis').selectedIndex=0;
-  document.getElementById('trSumber').value='sendiri';
-  document.getElementById('trSales').value='';
-  document.getElementById('salesNameBox').classList.add('hidden');
   document.getElementById('trKadar').selectedIndex=0;
   document.getElementById('trMax').textContent='-';
   document.getElementById('previewTransaksi').classList.add('hidden');
@@ -615,8 +669,6 @@ function updateTransaksiPreview(){
   const batu=Number(document.getElementById('trBatu').value)||0;
   const ki=Number(document.getElementById('trKadar').value);
   const deal=parseRupiah(document.getElementById('trDeal').value);
-  const sumber=document.getElementById('trSumber').value;
-  const sales=(document.getElementById('trSales').value||'').trim();
 
   if(!harga || berat<=0 || batu<0 || batu>=berat){
     document.getElementById('trMax').textContent='-';
@@ -636,13 +688,6 @@ function updateTransaksiPreview(){
     return;
   }
 
-  if(sumber==='sales' && !sales){
-    document.getElementById('previewTransaksi').classList.remove('hidden');
-    document.getElementById('previewTransaksi').innerHTML='<div class="text-red-600 font-bold">⚠️ Nama sales wajib diisi jika transaksi melalui sales.</div>';
-    delete data.pendingTransaksi;
-    return;
-  }
-
   if(deal>taksiranMax){
     document.getElementById('previewTransaksi').classList.remove('hidden');
     document.getElementById('previewTransaksi').innerHTML=
@@ -655,7 +700,7 @@ function updateTransaksiPreview(){
   const labaKotor=taksiranMax-deal;
   const bagianBos=labaKotor*.50;
   const bagianSaya=labaKotor*.50;
-  const bagianSales=bagianSaya*.20;
+  const bagianSales=bagianSaya*.25;
   const labaBersih=bagianSaya-bagianSales;
 
   data.pendingTransaksi={
@@ -663,13 +708,11 @@ function updateTransaksiPreview(){
     nama:document.getElementById('trNama').value.trim(),
     hp:document.getElementById('trHp').value.trim(),
     bank:document.getElementById('trBank').value.trim(),
-    namaRekening:document.getElementById('trNamaRekening').value.trim(),
     rekening:document.getElementById('trRekening').value.trim(),
     jenis:document.getElementById('trJenis').value,
     hargaEmas:harga,berat,batu,beratBersih,kadar:k.n,
     persenBeli:k.p,taksiranMax,deal,labaKotor,
-    bagianBos,bagianSaya,bagianSales,labaBersih,
-    sumber, sales: sumber==='sales' ? sales : ''
+    bagianBos,bagianSaya,bagianSales,labaBersih
   };
 
   const p=document.getElementById('previewTransaksi');
@@ -749,50 +792,42 @@ async function deleteMediaForTransaction(transactionId){
   db.close();
 }
 
-let mediaObjectUrls=[];
-function clearMediaUrls(){mediaObjectUrls.forEach(u=>URL.revokeObjectURL(u));mediaObjectUrls=[];}
 function setupMediaInput(){
   const input=document.getElementById('trMedia');
   if(!input || input.dataset.ready==='1')return;
   input.dataset.ready='1';
   input.addEventListener('change',()=>{
-    const p=document.getElementById('mediaPreview'); if(!p)return;
+    const p=document.getElementById('mediaPreview');
+    if(!p)return;
     p.innerHTML=Array.from(input.files).map(f=>'📎 '+esc(f.name)+' ('+Math.ceil(f.size/1024)+' KB)').join('<br>');
   });
 }
+
 async function renderMediaHistory(media){
   if(!media || !media.length)return '';
-  let html='<div class="mt-2 border-t pt-2"><div class="text-[10px] font-bold mb-2">Foto / Video</div><div class="media-grid">';
+  let html='<div class="mt-3 border-t pt-3"><div class="text-xs font-bold mb-2">Foto / Video Perhiasan</div>';
   for(const m of media){
-    const item=await getMedia(m.id); if(!item)continue;
-    const url=URL.createObjectURL(item.blob); mediaObjectUrls.push(url);
-    if(String(m.type||item.type||'').startsWith('video/')){
-      html+='<button type="button" data-media-view="'+esc(m.id)+'" class="media-thumb" title="Lihat video"><video src="'+url+'" muted playsinline preload="metadata"></video><span class="media-play">▶</span></button>';
-    }else{
-      html+='<button type="button" data-media-view="'+esc(m.id)+'" class="media-thumb" title="Lihat foto"><img src="'+url+'" alt="'+esc(m.name||'Foto')+'" loading="lazy"></button>';
-    }
+    html+='<button type="button" data-media-id="'+esc(m.id)+'" class="text-xs bg-gray-800 text-white rounded-lg px-3 py-2 mr-2 mb-2">Lihat / Download '+esc(m.name)+'</button>';
   }
-  return html+'</div></div>';
-}
-async function openMediaPreview(id){
-  const m=await getMedia(id); if(!m)return alert('File tidak ditemukan.');
-  const url=URL.createObjectURL(m.blob);
-  const box=document.getElementById('mediaModalContent');
-  if(String(m.type||'').startsWith('video/')) box.innerHTML='<button class="media-close" onclick="closeMediaModal(event)">×</button><video src="'+url+'" controls autoplay playsinline></video>';
-  else box.innerHTML='<button class="media-close" onclick="closeMediaModal(event)">×</button><img src="'+url+'" alt="'+esc(m.name||'Foto')+'">';
-  const modal=document.getElementById('mediaModal'); modal.classList.remove('hidden');
-  modal.dataset.objectUrl=url;
-}
-function closeMediaModal(e){if(e)e.stopPropagation();const modal=document.getElementById('mediaModal');if(!modal)return;const u=modal.dataset.objectUrl;if(u)URL.revokeObjectURL(u);modal.dataset.objectUrl='';document.getElementById('mediaModalContent').innerHTML='';modal.classList.add('hidden');}
-function setupMediaHistory(){
-  const box=document.getElementById('riwayatTransaksi'); if(!box)return;
-  box.addEventListener('click',e=>{const btn=e.target.closest('[data-media-view]');if(btn)openMediaPreview(btn.getAttribute('data-media-view'));});
+  return html+'</div>';
 }
 
-function nextNomorTransaksi(){
-  let max=0;
-  data.transaksi.forEach(t=>{const m=String(t.nomor||'').match(/(\d+)$/);if(m)max=Math.max(max,Number(m[1]));});
-  return 'TR-'+String(max+1).padStart(5,'0');
+async function openMediaFile(id){
+  const m=await getMedia(id);
+  if(!m)return alert('File tidak ditemukan.');
+  const url=URL.createObjectURL(m.blob);
+  const a=document.createElement('a');a.href=url;a.download=m.name;a.target='_blank';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+
+function setupMediaHistory(){
+  const box=document.getElementById('riwayatTransaksi');
+  if(!box)return;
+  box.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-media-id]');
+    if(btn)openMediaFile(btn.getAttribute('data-media-id'));
+  });
 }
 
 async function simpanTransaksi(){
@@ -800,11 +835,12 @@ async function simpanTransaksi(){
     return alert('Lengkapi data transaksi dan pastikan Harga Deal tidak melebihi Taksiran Maximum.');
   }
 
-  const transaksiBaru = {...data.pendingTransaksi, id:Date.now(), timestamp:Date.now(), tanggalISO:new Date().toISOString().slice(0,10), status:'penawaran'};
-  transaksiBaru.nomor = transaksiBaru.nomor || nextNomorTransaksi();
+  const transaksiBaru = {...data.pendingTransaksi, id:Date.now()};
+  transaksiBaru.status='penawaran';
+  transaksiBaru.buktiBayar=null;
   transaksiBaru.media=await saveMedia(transaksiBaru.id);
   data.transaksi.unshift(transaksiBaru);
-  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi)); persistServer();
+  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi));
 
   renderTransaksi();
   resetFormTransaksi();
@@ -823,7 +859,7 @@ function ubahPin(){
   if(baru!==konfirmasi)return alert('Konfirmasi PIN baru tidak sama.');
 
   ADMIN_PIN=baru;
-  localStorage.setItem('tg_admin_pin',baru); persistServer();
+  localStorage.setItem('tg_admin_pin',baru);
 
   document.getElementById('pinLama').value='';
   document.getElementById('pinBaru').value='';
@@ -831,12 +867,107 @@ function ubahPin(){
 
   alert('PIN Admin berhasil diubah.');
 }
+
+async function savePaymentProof(transactionId, file){
+  if(!file)return null;
+  const db=await openMediaDB();
+  const tx=db.transaction(MEDIA_STORE,'readwrite');
+  const store=tx.objectStore(MEDIA_STORE);
+  const id='bukti_'+transactionId+'_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  store.put({
+    id,
+    transactionId,
+    category:'bukti_bayar',
+    name:file.name,
+    type:file.type,
+    size:file.size,
+    blob:file
+  });
+  await new Promise((resolve,reject)=>{
+    tx.oncomplete=resolve;
+    tx.onerror=()=>reject(tx.error);
+  });
+  db.close();
+  return {id,name:file.name,type:file.type,size:file.size};
+}
+
+async function uploadBuktiBayar(index){
+  index=Number(index);
+  const t=data.transaksi[index];
+  if(!t)return alert('Transaksi tidak ditemukan.');
+
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='image/*,video/*,.pdf';
+  input.onchange=async()=>{
+    const file=input.files && input.files[0];
+    if(!file)return;
+    try{
+      const bukti=await savePaymentProof(t.id,file);
+      t.buktiBayar=bukti;
+      localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi));
+      renderTransaksi();
+      alert('Bukti pembayaran berhasil disimpan.');
+    }catch(e){
+      console.error(e);
+      alert('Bukti pembayaran gagal disimpan.');
+    }
+  };
+  input.click();
+}
+
+async function tampilkanBuktiBayar(t){
+  if(!t.buktiBayar)return '';
+  return '<div class="mt-2 text-xs border rounded-xl p-3 bg-green-50 border-green-200">'+
+    '<div class="font-bold text-green-700 mb-1">Bukti Pembayaran</div>'+
+    '<button type="button" data-media-id="'+esc(t.buktiBayar.id)+'" class="text-xs bg-green-700 text-white rounded-lg px-3 py-2">Lihat Bukti: '+esc(t.buktiBayar.name)+'</button>'+
+    '</div>';
+}
+
+function tandaiDeal(index){
+  index=Number(index);
+  const t=data.transaksi[index];
+  if(!t)return alert('Transaksi tidak ditemukan.');
+
+  if(!t.buktiBayar){
+    return alert('Upload bukti pembayaran terlebih dahulu sebelum menandai DEAL.');
+  }
+
+  if(!confirm('Tandai transaksi ini sebagai DEAL? Setelah DEAL transaksi akan masuk ke Laporan.'))return;
+
+  t.status='deal';
+  t.tanggalDeal=new Date().toLocaleDateString('id-ID',{
+    day:'numeric',month:'short',year:'numeric'
+  });
+  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi));
+  renderTransaksi();
+  alert('Transaksi berhasil ditandai DEAL dan siap masuk Laporan.');
+}
+
+function setupPaymentActions(){
+  const box=document.getElementById('riwayatTransaksi');
+  if(!box || box.dataset.paymentReady==='1')return;
+  box.dataset.paymentReady='1';
+
+  box.addEventListener('click',e=>{
+    const upload=e.target.closest('[data-bukti-index]');
+    if(upload){
+      e.preventDefault();
+      uploadBuktiBayar(upload.getAttribute('data-bukti-index'));
+      return;
+    }
+
+    const deal=e.target.closest('[data-deal-index]');
+    if(deal){
+      e.preventDefault();
+      tandaiDeal(deal.getAttribute('data-deal-index'));
+    }
+  });
+}
+
 function renderTransaksi(){
-  clearMediaUrls();
   const box=document.getElementById('riwayatTransaksi');
   if(!box) return;
-  const jumlah=document.getElementById('jumlahTransaksi');
-  if(jumlah)jumlah.textContent=data.transaksi.length+' transaksi tersimpan';
 
   if(!data.transaksi.length){
     box.innerHTML='<div class="text-sm text-gray-400 text-center py-4">Belum ada riwayat transaksi.</div>';
@@ -847,14 +978,13 @@ function renderTransaksi(){
 
   data.transaksi.forEach((t,index)=>{
     const div=document.createElement('div');
-    div.className='border rounded-2xl p-3 bg-white shadow-sm trans-card';
+    div.className='border rounded-2xl p-4 bg-white shadow-sm';
 
     div.innerHTML=
       '<div class="flex justify-between items-start gap-3">'+
         '<div>'+
-          '<div class="flex items-center gap-2"><span class="text-[10px] font-bold text-yellow-700">'+esc(t.nomor||'-')+'</span><span class="status-pill '+(t.status==='deal'?'status-deal':'status-offer')+'">'+(t.status==='deal'?'DEAL / SUDAH TRANSFER':'PENAWARAN')+'</span></div>'+
-          '<div class="font-bold text-sm mt-1">'+esc(t.nama||'-')+'</div>'+
-          '<div class="text-[10px] text-gray-500">'+esc(t.tanggal||'-')+'</div>'+
+          '<div class="font-bold text-base">'+esc(t.nama||'-')+'</div>'+
+          '<div class="text-xs text-gray-500">'+esc(t.hp||'-')+'</div>'+
         '</div>'+
         '<button type="button" data-hapus-transaksi="'+index+'" class="btn-hapus-transaksi text-red-600 text-xs font-bold border border-red-200 rounded-lg px-3 py-2">Hapus</button>'+
       '</div>'+
@@ -869,84 +999,33 @@ function renderTransaksi(){
       '</div>'+
 
       '<div class="mt-3 border-t pt-3 space-y-1 text-sm">'+
-        '<div class="flex justify-between"><span>Transaksi Melalui</span><b>'+esc(t.sumber==='sales' ? ('Sales: '+(t.sales||'-')) : 'Saya Sendiri')+'</b></div>'+
         '<div class="flex justify-between"><span>Laba Kotor</span><b>'+formatRp(Number(t.labaKotor||0))+'</b></div>'+
         '<div class="flex justify-between"><span>Bagian Saya</span><b>'+formatRp(Number(t.bagianSaya||0))+'</b></div>'+
         '<div class="flex justify-between"><span>Bagian Bos</span><b>'+formatRp(Number(t.bagianBos||0))+'</b></div>'+
-        '<div class="flex justify-between"><span>Bagian Sales (20%)</span><b>'+formatRp(Number(t.bagianSales||0))+'</b></div>'+
+        '<div class="flex justify-between"><span>Bagian Sales</span><b>'+formatRp(Number(t.bagianSales||0))+'</b></div>'+
         '<div class="flex justify-between border-t pt-2"><span>Laba Bersih Saya</span><b>'+formatRp(Number(t.labaBersih||0))+'</b></div>'+
       '</div>'+
 
       ((t.bank||t.rekening)?
         '<div class="mt-3 text-xs text-gray-500 border-t pt-2">Bank: '+esc(t.bank||'-')+' • Rek: '+esc(t.rekening||'-')+'</div>':'')+
-      '<div class="grid grid-cols-2 gap-2 mt-3">'+
-        '<button type="button" onclick="copyOrShareWA('+t.id+')" class="text-xs font-bold border rounded-lg py-2 bg-green-50 text-green-700">📲 Laporan WA</button>'+
-        (t.status==='deal'?'<button type="button" disabled class="text-xs font-bold border rounded-lg py-2 bg-gray-100 text-gray-500">✓ Sudah Deal</button>':'<button type="button" onclick="tandaiDeal('+t.id+')" class="text-xs font-bold border rounded-lg py-2 bg-yellow-50 text-yellow-700">💰 Tandai Deal</button>')+
+
+      '<div class="text-xs text-gray-400 mt-2">'+esc(t.tanggal||'-')+'</div>'+
+      '<div class="mt-3 flex items-center justify-between gap-2">'+
+        '<span class="text-xs font-bold px-2 py-1 rounded-full '+(t.status==='deal'?'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700')+'">'+(t.status==='deal'?'DEAL':'PENAWARAN')+'</span>'+
+        (t.status==='deal'
+          ? '<span class="text-xs text-green-700 font-semibold">✓ Sudah deal</span>'
+          : '<div class="flex gap-2">'+
+              '<button type="button" data-bukti-index="'+index+'" class="text-xs bg-blue-600 text-white rounded-lg px-3 py-2 font-bold">📎 Upload Bukti Bayar</button>'+
+              '<button type="button" data-deal-index="'+index+'" class="text-xs bg-green-600 text-white rounded-lg px-3 py-2 font-bold">✓ Tandai DEAL</button>'+
+            '</div>')+
       '</div>'+
+      '<div id="bukti-'+t.id+'"></div>'+
       '<div id="media-'+t.id+'"></div>';
 
     box.appendChild(div);
     if(t.media&&t.media.length){ renderMediaHistory(t.media).then(html=>{const el=document.getElementById('media-'+t.id); if(el)el.innerHTML=html;}); }
+    if(t.buktiBayar){ tampilkanBuktiBayar(t).then(html=>{const el=document.getElementById('bukti-'+t.id); if(el)el.innerHTML=html;}); }
   });
-}
-
-
-function getTransactionById(id){return data.transaksi.find(t=>Number(t.id)===Number(id));}
-function waText(t){
-  const lines=[
-    'LAPORAN PENAWARAN TIAN GOLD',
-    '',
-    'No Transaksi: '+(t.nomor||'-'),
-    'Tanggal: '+(t.tanggal||'-'),
-    'Status: '+(t.status==='deal'?'SUDAH DEAL / SUDAH TRANSFER':'PENAWARAN'),
-    '',
-    'Konsumen: '+(t.nama||'-'),
-    'No HP: '+(t.hp||'-'),
-    'Jenis: '+(t.jenis||'-'),
-    'Kadar: '+(t.kadar||'-'),
-    'Berat: '+Number(t.berat||0).toFixed(2)+' gr',
-    'Potongan Batu: '+Number(t.batu||0).toFixed(2)+' gr',
-    'Berat Bersih: '+Number(t.beratBersih||0).toFixed(2)+' gr',
-    'Taksiran Maximum: '+formatRp(Number(t.taksiranMax||0)),
-    'Harga Penawaran: '+formatRp(Number(t.deal||0)),
-    '',
-    'Keuntungan Sebelum Bagi Hasil: '+formatRp(Number(t.labaKotor||0)),
-    'Bagian Bos: '+formatRp(Number(t.bagianBos||0)),
-    'Bagian Saya: '+formatRp(Number(t.bagianSaya||0)),
-    ...(t.sumber==='sales'?['Sales: '+(t.sales||'-'),'Bagian Sales 20%: '+formatRp(Number(t.bagianSales||0))]:[]),
-    'Laba Bersih Saya: '+formatRp(Number(t.labaBersih||0)),
-    '',
-    'Bank: '+(t.bank||'-'),
-    'Bank: '+(t.bank||'-'),
-    'Nama Rekening: '+(t.namaRekening||'-'),
-    'No Rekening Konsumen: '+(t.rekening||'-'),
-    '',
-    'Lampiran: '+((t.media&&t.media.length)?t.media.length+' file foto/video':'Tidak ada')
-  ];
-  return lines.join('\n');
-}
-async function copyOrShareWA(id){
-  const t=getTransactionById(id); if(!t)return alert('Transaksi tidak ditemukan.');
-  const text=waText(t);
-  try{await navigator.clipboard.writeText(text);}catch(e){}
-  if(t.media&&t.media.length&&navigator.share&&navigator.canShare){
-    try{
-      const files=[];
-      for(const m of t.media){const item=await getMedia(m.id);if(item)files.push(new File([item.blob],m.name,{type:item.type||m.type||'application/octet-stream'}));}
-      const shareData={title:'Laporan '+(t.nomor||''),text,files};
-      if(navigator.canShare({files})) { await navigator.share(shareData); return; }
-    }catch(e){ if(e && e.name==='AbortError')return; }
-  }
-  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
-  alert(t.media&&t.media.length?'Laporan sudah dibuka di WhatsApp. Foto/video perlu dipilih sebagai lampiran secara manual.':'Laporan sudah dibuka di WhatsApp.');
-}
-function tandaiDeal(id){
-  const t=getTransactionById(id); if(!t)return;
-  if(t.status==='deal')return;
-  const yakin=confirm('Tandai '+(t.nomor||'transaksi ini')+' sebagai SUDAH DEAL / SUDAH TRANSFER? Setelah ini transaksi masuk ke laporan keuntungan.');
-  if(!yakin)return;
-  t.status='deal'; t.dealTimestamp=Date.now(); t.dealTanggalISO=new Date().toISOString().slice(0,10); t.dealTanggal=new Date().toLocaleString('id-ID');
-  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi)); persistServer(); renderTransaksi(); renderLaporan();
 }
 
 function hapusTransaksi(index){
@@ -964,7 +1043,7 @@ function hapusTransaksi(index){
 
   const id=data.transaksi[index].id;
   data.transaksi.splice(index,1);
-  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi)); persistServer();
+  localStorage.setItem('tg_transaksi',JSON.stringify(data.transaksi));
   if(id) deleteMediaForTransaction(id);
   renderTransaksi();
 
@@ -985,104 +1064,19 @@ function setupDeleteTransaksi(){
 }
 
 
-function getTanggalKey(t){
-  if(t.tanggalISO && /^\d{4}-\d{2}-\d{2}$/.test(String(t.tanggalISO))) return String(t.tanggalISO);
-  const ts=Number(t.timestamp||0);if(ts)return new Date(ts).toISOString().slice(0,10);
-  const idTs=Number(t.id||0);if(idTs>1000000000000)return new Date(idTs).toISOString().slice(0,10);
-  const raw=String(t.tanggal||'');const m=raw.match(/(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);if(m)return m[3]+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0');
-  const parsed=Date.parse(raw);if(!Number.isNaN(parsed))return new Date(parsed).toISOString().slice(0,10);return '';
-}
-function formatTanggalID(key){
-  if(!key)return '-';
-  const d=new Date(key+'T00:00:00');
-  return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
-}
-
-function refreshSalesFilter(){
-  const el=document.getElementById('laporSales');
-  if(!el)return;
-  const current=el.value;
-  const names=[...new Set(data.transaksi.filter(t=>t.sumber==='sales'&&t.sales).map(t=>t.sales.trim()))].sort((a,b)=>a.localeCompare(b));
-  el.innerHTML='<option value="__all__">Semua</option><option value="__self__">Saya Sendiri</option>'+
-    names.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('');
-  if(names.includes(current)||current==='__all__'||current==='__self__')el.value=current;
-}
-
-function getLaporanTransactions(){
-  const dari=document.getElementById('laporDari').value;
-  const sampai=document.getElementById('laporSampai').value;
-  const filter=document.getElementById('laporSales').value;
-  return data.transaksi.filter(t=>{
-    if(t.status!=='deal')return false;
-    const key=getTanggalKey(t);
-    if(dari && key<dari)return false;
-    if(sampai && key>sampai)return false;
-    if(filter==='__self__' && t.sumber==='sales')return false;
-    if(filter!=='__all__' && filter!=='__self__' && (t.sales||'')!==filter)return false;
-    return true;
-  });
-}
-
-function renderLaporan(){
-  refreshSalesFilter();const list=getLaporanTransactions();
-  const vals=[list.reduce((s,t)=>s+Number(t.deal||0),0),list.reduce((s,t)=>s+Number(t.labaKotor||0),0),list.reduce((s,t)=>s+Number(t.bagianBos||0),0),list.reduce((s,t)=>s+Number(t.bagianSaya||0),0),list.reduce((s,t)=>s+Number(t.bagianSales||0),0),list.reduce((s,t)=>s+Number(t.labaBersih||0),0)];
-  const cards=[['Transaksi',list.length],['Uang Keluar / Deal',formatRp(vals[0])],['Laba Sebelum Bagi Hasil',formatRp(vals[1])],['Bagian Bos',formatRp(vals[2])],['Bagian Saya (50%)',formatRp(vals[3])],['Sales (20% bagian saya)',formatRp(vals[4])],['Laba Bersih Saya',formatRp(vals[5])]];
-  document.getElementById('laporanRingkasan').innerHTML=cards.map(c=>'<div class="border rounded-xl p-3 bg-gray-50"><div class="text-xs text-gray-500">'+esc(c[0])+'</div><div class="font-bold mt-1">'+esc(c[1])+'</div></div>').join('');
-  const bySales={};list.forEach(t=>{const k=t.sumber==='sales'?(String(t.sales||'').trim()||'Sales Tanpa Nama'):'Saya Sendiri';if(!bySales[k])bySales[k]={count:0,deal:0,laba:0,bos:0,saya:0,sales:0,bersih:0};const d=bySales[k];d.count++;d.deal+=Number(t.deal||0);d.laba+=Number(t.labaKotor||0);d.bos+=Number(t.bagianBos||0);d.saya+=Number(t.bagianSaya||0);d.sales+=Number(t.bagianSales||0);d.bersih+=Number(t.labaBersih||0);});
-  document.getElementById('laporanSalesRingkasan').innerHTML=Object.keys(bySales).sort().map(k=>{const d=bySales[k];return '<div class="border rounded-xl p-3"><div class="font-bold mb-2">'+esc(k)+' <span class="text-xs text-gray-400">('+d.count+' transaksi)</span></div><div class="grid grid-cols-2 gap-1 text-xs"><div>Uang Keluar<br><b>'+formatRp(d.deal)+'</b></div><div>Laba Sebelum Bagi Hasil<br><b>'+formatRp(d.laba)+'</b></div><div>Bagian Bos<br><b>'+formatRp(d.bos)+'</b></div><div>Bagian Saya<br><b>'+formatRp(d.saya)+'</b></div><div>Bagian Sales<br><b>'+formatRp(d.sales)+'</b></div><div>Laba Bersih Saya<br><b>'+formatRp(d.bersih)+'</b></div></div></div>';}).join('')||'<div class="text-sm text-gray-400 text-center py-3">Tidak ada data.</div>';
-  const byDay={};list.forEach(t=>{const k=getTanggalKey(t)||'tanpa-tanggal';if(!byDay[k])byDay[k]={count:0,keluar:0,laba:0,bos:0,saya:0,sales:0,bersih:0};const d=byDay[k];d.count++;d.keluar+=Number(t.deal||0);d.laba+=Number(t.labaKotor||0);d.bos+=Number(t.bagianBos||0);d.saya+=Number(t.bagianSaya||0);d.sales+=Number(t.bagianSales||0);d.bersih+=Number(t.labaBersih||0);});
-  const box=document.getElementById('laporanHarian'),daily=Object.keys(byDay).sort().reverse();if(!daily.length){box.innerHTML='<div class="text-sm text-gray-400 text-center py-4">Tidak ada transaksi pada filter ini.</div>';return;}
-  box.innerHTML=daily.map(k=>{const d=byDay[k];return '<div class="border rounded-xl p-4"><div class="flex justify-between font-bold mb-3"><span>'+esc(k==='tanpa-tanggal'?'Tanpa tanggal':formatTanggalID(k))+'</span><span>'+d.count+' transaksi</span></div><div class="space-y-1 text-sm"><div class="flex justify-between"><span>Uang Keluar / Deal</span><b>'+formatRp(d.keluar)+'</b></div><div class="flex justify-between"><span>Laba Sebelum Bagi Hasil</span><b>'+formatRp(d.laba)+'</b></div><div class="flex justify-between"><span>Bagian Bos</span><b>'+formatRp(d.bos)+'</b></div><div class="flex justify-between"><span>Bagian Saya</span><b>'+formatRp(d.saya)+'</b></div><div class="flex justify-between"><span>Bagian Sales</span><b>'+formatRp(d.sales)+'</b></div><div class="flex justify-between border-t pt-2"><span>Laba Bersih Saya</span><b>'+formatRp(d.bersih)+'</b></div></div></div>';}).join('');
-}
-function resetLaporan(){
-  document.getElementById('laporDari').value='';
-  document.getElementById('laporSampai').value='';
-  document.getElementById('laporSales').value='__all__';
-  refreshSalesFilter();
-  renderLaporan();
-}
-
-function exportLaporanExcel(){
-  const list=getLaporanTransactions();
-  if(!list.length)return alert('Tidak ada data laporan untuk diexport.');
-  const dari=document.getElementById('laporDari').value||'Semua';
-  const sampai=document.getElementById('laporSampai').value||'Semua';
-  const filter=document.getElementById('laporSales').value;
-  const filterLabel=filter==='__all__'?'Semua':(filter==='__self__'?'Saya Sendiri':filter);
-
-  const headers=['Tanggal','Nama','No HP','Transaksi Melalui','Nama Sales','Harga Deal / Uang Keluar','Taksiran Maximum','Laba Sebelum Bagi Hasil','Bagian Bos','Bagian Saya 50%','Bagian Sales 20%','Laba Bersih Saya'];
-  const rows=list.slice().sort((a,b)=>getTanggalKey(a).localeCompare(getTanggalKey(b))).map(t=>[
-    getTanggalKey(t),t.nama||'',t.hp||'',t.sumber==='sales'?'Sales':'Saya Sendiri',t.sales||'',
-    Number(t.deal||0),Number(t.taksiranMax||0),Number(t.labaKotor||0),Number(t.bagianBos||0),
-    Number(t.bagianSaya||0),Number(t.bagianSales||0),Number(t.labaBersih||0)
-  ]);
-  const html='<html><head><meta charset="UTF-8"></head><body><h2>Laporan TIAN GOLD</h2>'+
-    '<p>Periode: '+esc(dari)+' s/d '+esc(sampai)+' | Filter: '+esc(filterLabel)+'</p>'+
-    '<table border="1"><thead><tr>'+headers.map(h=>'<th>'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+
-    rows.map(row=>'<tr>'+row.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('')+
-    '</tbody></table></body></html>';
-  const blob=new Blob(['\ufeff'+html],{type:'application/vnd.ms-excel'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a'); a.href=url;
-  a.download='Laporan_Tian_Gold_'+(dari==='Semua'?'semua':dari)+(sampai!=='Semua'?'_'+sampai:'')+'.xls';
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
 function exportExcel(){
   if(!data.transaksi.length)return alert('Belum ada transaksi untuk diexport.');
 
   const header=[
-    'Tanggal','Nama','No HP','Nama Bank','Nama Rekening','No Rekening','Berat Emas','Potongan Batu','Berat Bersih',
+    'Tanggal','Nama','No HP','Nama Bank','No Rekening','Berat Emas','Potongan Batu','Berat Bersih',
     'Kadar','% Beli','Taksiran Maximum','Harga Deal','Laba Kotor',
-    'Transaksi Melalui','Nama Sales','Bagian Bos','Bagian Sales 20%','Laba Bersih'
+    'Bagian Bos','Bagian Sales','Laba Bersih'
   ];
 
   const rows=data.transaksi.map(t=>[
-    t.tanggal,t.nama,t.hp,t.bank||'',t.namaRekening||'',t.rekening||'',t.berat,t.batu,t.beratBersih,
+    t.tanggal,t.nama,t.hp,t.bank||'',t.rekening||'',t.berat,t.batu,t.beratBersih,
     t.kadar,Math.round(t.persenBeli*100),t.taksiranMax,t.deal,
-    t.labaKotor,t.sumber==='sales'?'Sales':'Saya Sendiri',t.sales||'',
-    t.bagianBos,t.bagianSales,t.labaBersih
+    t.labaKotor,t.bagianBos,t.bagianSales,t.labaBersih
   ]);
 
   const csv='\ufeff'+[header,...rows].map(row=>
@@ -1100,20 +1094,7 @@ function exportExcel(){
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  init(); setupRupiahInputs(); setupFormFocus(); setupDeleteTransaksi(); setupMediaInput(); setupMediaHistory(); renderTransaksi();
-  const sumber=document.getElementById('trSumber');
-  if(sumber)sumber.addEventListener('change',()=>{
-    document.getElementById('salesNameBox').classList.toggle('hidden',sumber.value!=='sales');
-    updateTransaksiPreview();
-  });
-  const sales=document.getElementById('trSales');
-  if(sales)sales.addEventListener('input',updateTransaksiPreview);
-  refreshSalesFilter();
-  renderLaporan();
-});
+document.addEventListener('DOMContentLoaded',()=>{ init(); setupRupiahInputs(); setupDeleteTransaksi(); setupMediaInput(); setupMediaHistory(); setupPaymentActions(); renderTransaksi(); });
 </script>
 </body>
 </html>
