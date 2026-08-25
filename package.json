@@ -1,0 +1,8 @@
+{
+  "name": "tian-gold",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^10.3.0"
+  }
+}
